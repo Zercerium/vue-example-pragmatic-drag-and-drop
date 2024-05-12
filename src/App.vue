@@ -4,6 +4,7 @@ import ChessBoard from './components/ChessBoard.vue';
 
 <template>
   <div class="text-3xl font-bold">Chessboard :D</div>
+
   <div>
     <ChessBoard />
   </div>

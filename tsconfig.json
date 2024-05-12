@@ -13,5 +13,8 @@
     {
       "path": "./nightwatch/tsconfig.json"
     }
-  ]
+  ],
+  "compilerOptions": {
+    "module": "es2020"
+  }
 }

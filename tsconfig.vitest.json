@@ -4,8 +4,11 @@
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
-
+    "module": "ES2020",
     "lib": [],
-    "types": ["node", "jsdom"]
+    "types": [
+      "node",
+      "jsdom"
+    ]
   }
 }

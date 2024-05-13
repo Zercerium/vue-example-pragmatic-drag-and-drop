@@ -8,7 +8,7 @@ import {
   type Coord,
   type PieceRecord
 } from './chessboard';
-import ChessSquare from './icons/ChessSquare.vue';
+import ChessSquare from './chess/ChessSquare.vue';
 import { monitorForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
 
 const pieces: PieceRecord[] = reactive([

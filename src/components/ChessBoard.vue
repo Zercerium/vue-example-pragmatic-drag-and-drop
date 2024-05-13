@@ -17,7 +17,7 @@ const squares = ((pieces: PieceRecord[]) => {
 
       const isDark = (row + col) % 2 === 1;
 
-      squares.push({ piece, isDark });
+      squares.push({ piece, isDark, location: squareCoord });
     }
   }
   return squares;
@@ -27,7 +27,7 @@ const squares = ((pieces: PieceRecord[]) => {
 <template>
   <div class="grid h-[500px] w-[500px] grid-cols-8 grid-rows-8 border-2 border-gray-300">
     <template v-for="(square, index) in squares" :key="index">
-      <ChessSquare :square="square" />
+      <ChessSquare :square="square" :pieces="pieces" />
     </template>
   </div>
 </template>

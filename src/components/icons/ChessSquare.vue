@@ -20,14 +20,15 @@ const squareRef = ref();
 onMounted(() => {
   dropTargetForElements({
     element: squareRef.value,
+    getData: () => ({ location: props.square.location }),
     onDragEnter: ({ source }) => {
+      const piece = source.data.piece;
       if (
         // type guards
-        !isPiece(source.data.piece)
+        !isPiece(piece)
       ) {
         return;
       }
-      const piece = source.data.piece;
 
       if (canMove(piece.location, props.square.location, piece.type, props.pieces)) {
         state.value = 'validMove';

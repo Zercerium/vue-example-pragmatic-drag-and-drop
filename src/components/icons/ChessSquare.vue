@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref, type Ref } from 'vue';
 import { dropTargetForElements } from '@atlaskit/pragmatic-drag-and-drop/element/adapter';
-import { canMove, isCoord, isPieceType, type Coord, type PieceRecord } from '../chessboard';
+import { canMove, isEqualCoord, isPiece, type Coord, type PieceRecord } from '../chessboard';
 import ChessPiece from './ChessPiece.vue';
 
 const props = defineProps<{
@@ -21,14 +21,13 @@ onMounted(() => {
   dropTargetForElements({
     element: squareRef.value,
     onDragEnter: ({ source }) => {
-      const piece = source.data.piece as PieceRecord;
       if (
         // type guards
-        !isCoord(piece.location) ||
-        !isPieceType(piece.type)
+        !isPiece(source.data.piece)
       ) {
         return;
       }
+      const piece = source.data.piece;
 
       if (canMove(piece.location, props.square.location, piece.type, props.pieces)) {
         state.value = 'validMove';
@@ -37,7 +36,16 @@ onMounted(() => {
       }
     },
     onDragLeave: () => (state.value = 'idle'),
-    onDrop: () => (state.value = 'idle')
+    onDrop: () => (state.value = 'idle'),
+    canDrop: ({ source }) => {
+      if (
+        // type guards
+        !isPiece(source.data.piece)
+      ) {
+        return false;
+      }
+      return !isEqualCoord(source.data.piece.location, props.square.location);
+    }
   });
 });
 

@@ -9,6 +9,17 @@ export function isEqualCoord(c1: Coord, c2: Coord): boolean {
   return c1[0] === c2[0] && c1[1] === c2[1];
 }
 
+export function isPiece(token: unknown): token is PieceRecord {
+  return (
+    typeof token === 'object' &&
+    token !== null &&
+    'type' in token &&
+    isPieceType((token as PieceRecord).type) &&
+    'location' in token &&
+    isCoord((token as PieceRecord).location)
+  );
+}
+
 export function isCoord(token: unknown): token is Coord {
   return (
     Array.isArray(token) && token.length === 2 && token.every((val) => typeof val === 'number')
